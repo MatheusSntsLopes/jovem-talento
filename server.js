@@ -17,7 +17,7 @@ const helmet = require('helmet');
 const csrf = require('csurf');
 const routes = require('./routes');
 
-const { meuMiddleware, checkCsrfToken, csrfMiddleware } = require('./src/middlewares/middleware');
+const { csrfMiddleware } = require('./src/middlewares/middleware');
 
 app.use(helmet());
 

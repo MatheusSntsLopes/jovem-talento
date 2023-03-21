@@ -16,6 +16,7 @@ module.exports = {
     'import/first': 'off',
     'no-param-reassign': 'off',
     'Unable to resolve path to module ': 'off',
+    'no-restricted-syntax': 'off',
     camelcase: 'off',
   },
 };
