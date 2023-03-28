@@ -18,5 +18,8 @@ module.exports = {
     'Unable to resolve path to module ': 'off',
     'no-restricted-syntax': 'off',
     camelcase: 'off',
+    'no-unused-vars': 'off',
+    'no-underscore-dangle': 'off',
+    'class-methos-use-this': 'off',
   },
 };
