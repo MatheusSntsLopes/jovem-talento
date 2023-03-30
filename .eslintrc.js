@@ -21,5 +21,6 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-underscore-dangle': 'off',
     'class-methos-use-this': 'off',
+    'quote-props': 'off',
   },
 };

@@ -24,7 +24,10 @@
         "express-session": "^1.17.1",
         "helmet": "^4.6.0",
         "mongoose": "^5.12.1",
+        "pg": "^8.10.0",
+        "pg-hstore": "^2.3.4",
         "regenerator-runtime": "^0.13.7",
+        "sequelize": "^6.30.0",
         "style-loader": "^2.0.0",
         "validator": "^13.9.0"
     },
@@ -37,6 +40,7 @@
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-plugin-import": "^2.27.5",
         "nodemon": "^2.0.22",
+        "sequelize-cli": "^6.6.0",
         "sucrase": "^3.31.0",
         "webpack": "^5.27.0",
         "webpack-cli": "^4.5.0"
