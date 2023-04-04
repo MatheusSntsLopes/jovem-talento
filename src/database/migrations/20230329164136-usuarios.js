@@ -21,38 +21,7 @@ module.exports = {
         email: {
           type: Sequelize.STRING,
           allowNull: false,
-        },
-        rua: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        bairro: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        cep: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        cidade: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        num_casa: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-        },
-        data_nascimento: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        telefone: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-        },
-        cpf_cnpj: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
+          unique: true,
         },
         password_hash: {
           type: Sequelize.STRING,
@@ -67,11 +36,7 @@ module.exports = {
           allowNull: false,
         },
       },
-
     );
   },
-
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('usuarios');
-  },
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('usuarios'),
 };
