@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
-import Colaborador from '../models/Usuario';
+import Usuario from '../models/User';
 
-const models = [Colaborador];
+const models = [Usuario];
 
 const connection = new Sequelize(databaseConfig);
 
