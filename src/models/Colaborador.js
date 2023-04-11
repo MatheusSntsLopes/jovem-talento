@@ -1,9 +1,15 @@
+require('dotenv').config();
+
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import bcryptjs from 'bcryptjs';
 
-const sequelize = new Sequelize('postgres://gvwpuipy:iRs_SFZH07QCniwTlkUvt86QS3HCBiVp@babar.db.elephantsql.com/gvwpuipy');
+const sequelize = new Sequelize(process.env.DATABASE_CONNECTION);
 
-export default class Colaborador extends Model {}
+export default class Colaborador extends Model {
+  passwordIsValid(password) {
+    return bcryptjs.compare(password, this.password_hash);
+  }
+}
 
 Colaborador.init(
   {
@@ -148,7 +154,9 @@ Colaborador.init(
     sequelize,
     timestamps: false,
     modelName: 'Colaboradores',
-
+    passwordIsValid(password) {
+      bcryptjs.compare(password, this.password_hash);
+    },
   },
 );
 

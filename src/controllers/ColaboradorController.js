@@ -12,7 +12,7 @@ class ColaboradorController {
 
   async index(req, res) {
     try {
-      const colaboradores = await Colaborador.findAll();
+      const colaboradores = await Colaborador.findAll({ attributes: ['id', 'nome', 'email', 'estado', 'cidade', 'rua'] });
       return res.json(colaboradores);
     } catch (e) {
       return res.json(null);
@@ -21,9 +21,9 @@ class ColaboradorController {
 
   async show(req, res) {
     try {
-      const { id } = req.params;
-      const colaborador = await Colaborador.findByPk(id);
-      return res.json(colaborador);
+      const colaborador = await Colaborador.findByPk(req.params.id);
+      const { id, nome, email } = colaborador;
+      return res.json({ id, nome, email });
     } catch (e) {
       return res.json(null);
     }
@@ -31,11 +31,7 @@ class ColaboradorController {
 
   async update(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({ errors: ['ID não enviado'] });
-      }
-
-      const colaborador = await Colaborador.findByPk(req.params.id);
+      const colaborador = await Colaborador.findByPk(req.colaborador.id);
 
       if (!colaborador) {
         return res.status(400).json({ errors: ['Colaborador não existe'] });

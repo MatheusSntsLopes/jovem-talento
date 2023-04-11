@@ -22,5 +22,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'class-methos-use-this': 'off',
     'quote-props': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 };
