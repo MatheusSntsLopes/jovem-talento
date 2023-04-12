@@ -4,7 +4,8 @@ class ColaboradorController {
   async store(req, res) {
     try {
       const colaborador = await Colaborador.create(req.body);
-      res.json(colaborador);
+      const { id, nome, email } = colaborador;
+      res.json({ id, nome, email });
     } catch (e) {
       res.status(400).json({ errors: e.errors.map((err) => err.message) });
     }
@@ -38,8 +39,12 @@ class ColaboradorController {
       }
 
       const novosDados = await colaborador.update(req.body);
-
-      return res.json(novosDados);
+      const {
+        id, nome, email, cpf, idade, telefone, estado, cidade, bairro, cep, rua, numero,
+      } = novosDados;
+      return res.json({
+        id, nome, email, cpf, idade, telefone, estado, cidade, bairro, cep, rua, numero,
+      });
     } catch (e) {
       return res.status(400).json({ errors: e.errors.map((err) => err.message) });
     }
@@ -47,11 +52,7 @@ class ColaboradorController {
 
   async delete(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({ errors: ['ID não enviado'] });
-      }
-
-      const colaborador = await Colaborador.findByPk(req.params.id);
+      const colaborador = await Colaborador.findByPk(req.colaborador.id);
 
       if (!colaborador) {
         return res.status(400).json({ errors: ['Colaborador não existe'] });
@@ -59,7 +60,7 @@ class ColaboradorController {
 
       await colaborador.destroy();
 
-      return res.json(null);
+      return res.json({ message: ['Conta deletada com sucesso'] });
     } catch (e) {
       return res.status(400).json({ errors: e.errors.map((err) => err.message) });
     }

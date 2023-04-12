@@ -8,8 +8,8 @@ class TokenController {
     if (!email || !password) {
       return res.status(401).json({ error: ['Email ou senha invalidos'] });
     }
-    console.log(password);
-    const colaborador = await Colaborador.findOne({ where: { email, password } });
+
+    const colaborador = await Colaborador.findOne({ where: { email } });
 
     if (!colaborador) {
       return res.status(401).json({ error: ['Colaborador não existe'] });
