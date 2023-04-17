@@ -9,6 +9,10 @@ export default class Colaborador extends Model {
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
+
+  static associate(models) {
+    this.hasOne(models.Curriculo, { foreignKey: 'colaborador_id' });
+  }
 }
 
 Colaborador.init(

@@ -4,7 +4,7 @@ import loginRequired from '../middlewares/loginRequired';
 
 const router = new Router();
 router.post('/', colaboradorController.store);
-router.get('/', loginRequired, colaboradorController.index);
+router.get('/', colaboradorController.index);
 router.get('/', loginRequired, colaboradorController.show);
 router.put('/', loginRequired, colaboradorController.update);
 router.delete('/', loginRequired, colaboradorController.delete);

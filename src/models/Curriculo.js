@@ -6,8 +6,8 @@ import bcryptjs from 'bcryptjs';
 const sequelize = new Sequelize(process.env.DATABASE_CONNECTION);
 
 export default class Curriculo extends Model {
-  passwordIsValid(password) {
-    return bcryptjs.compare(password, this.password_hash);
+  static associate(models) {
+    this.belongsTo(models.Colaborador, { foreignKey: 'colaborador_id' });
   }
 }
 
@@ -19,8 +19,8 @@ Curriculo.init(
         defaultValue: '',
         validate: {
           len: {
-            args: [0, 1000],
-            msg: 'Campo biografia deve ter entre 0 a 1000 caracteres',
+            args: [3, 1000],
+            msg: 'Este campo deve ter entre 3 e 1000 caracteres',
           },
         },
       },
@@ -31,8 +31,20 @@ Curriculo.init(
         defaultValue: '',
         validate: {
           len: {
-            args: [0, 5000],
-            msg: 'Campo estado deve ter entre 0 a 5000 caracteres',
+            args: [3, 1000],
+            msg: 'Campo estado deve ter entre 3 e 255 caracteres',
+          },
+        },
+      },
+    },
+    experiencia: {
+      type: {
+        type: DataTypes.STRING,
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [3, 1000],
+            msg: 'Este campo deve ter entre 3 e 1000 caracteres',
           },
         },
       },
@@ -43,8 +55,8 @@ Curriculo.init(
         defaultValue: '',
         validate: {
           len: {
-            args: [0, 5000],
-            msg: 'Campo estado deve ter entre 0 a 5000 caracteres',
+            args: [3, 1000],
+            msg: 'Este campo deve ter entre 3 e 1000 caracteres',
           },
         },
       },
@@ -55,8 +67,8 @@ Curriculo.init(
         defaultValue: '',
         validate: {
           len: {
-            args: [0, 5000],
-            msg: 'Campo estado deve ter entre 0 a 5000 caracteres',
+            args: [3, 1000],
+            msg: 'Este campo deve ter entre 3 e 1000 caracteres',
           },
         },
       },

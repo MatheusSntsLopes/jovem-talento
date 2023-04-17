@@ -1,4 +1,5 @@
 import Colaborador from '../models/Colaborador';
+import Curriculo from '../models/Curriculo';
 
 class ColaboradorController {
   async store(req, res) {
@@ -13,7 +14,13 @@ class ColaboradorController {
 
   async index(req, res) {
     try {
-      const colaboradores = await Colaborador.findAll({ attributes: ['id', 'nome', 'email', 'estado', 'cidade', 'rua'] });
+      const colaboradores = await Colaborador.findAll({
+        attributes: ['id', 'nome', 'email', 'estado', 'cidade', 'rua'],
+        include: {
+          model: Curriculo,
+          attributes: ['biografia', 'formacao', 'experiencia', 'competencia', 'habilidade'],
+        },
+      });
       return res.json(colaboradores);
     } catch (e) {
       return res.json(null);
@@ -22,9 +29,15 @@ class ColaboradorController {
 
   async show(req, res) {
     try {
-      const colaborador = await Colaborador.findByPk(req.params.id);
-      const { id, nome, email } = colaborador;
-      return res.json({ id, nome, email });
+      const colaborador = await Colaborador.findByPk(req.colaboradorId, {
+        attributes: ['id', 'nome', 'email', 'estado', 'cidade', 'rua'],
+        include: {
+          model: Curriculo,
+          attributes: ['biografia', 'formacao', 'experiencia', 'competencia', 'habilidade'],
+        },
+      });
+
+      return res.json(colaborador);
     } catch (e) {
       return res.json(null);
     }
@@ -32,7 +45,7 @@ class ColaboradorController {
 
   async update(req, res) {
     try {
-      const colaborador = await Colaborador.findByPk(req.colaborador.id);
+      const colaborador = await Colaborador.findByPk(req.colaboradorId);
 
       if (!colaborador) {
         return res.status(400).json({ errors: ['Colaborador não existe'] });
@@ -52,7 +65,7 @@ class ColaboradorController {
 
   async delete(req, res) {
     try {
-      const colaborador = await Colaborador.findByPk(req.colaborador.id);
+      const colaborador = await Colaborador.findByPk(req.colaboradorId);
 
       if (!colaborador) {
         return res.status(400).json({ errors: ['Colaborador não existe'] });

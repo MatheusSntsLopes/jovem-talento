@@ -8,6 +8,16 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      colaborador_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Colaboradores',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
       biografia: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -16,16 +26,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      habilidade: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       experiencia: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       competencia: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      habilidade: {
         type: Sequelize.STRING,
         allowNull: false,
       },
