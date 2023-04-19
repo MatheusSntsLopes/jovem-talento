@@ -5,7 +5,9 @@ import Curriculo from '../models/Curriculo';
 
 const models = [Colaborador, Curriculo];
 
-const connection = new Sequelize(databaseConfig);
+const connection = new Sequelize(process.env.DATABASE_CONNECTION);
+console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 
 models.forEach((model) => model.init(connection));
-models.forEach((model) => model.associate && model.associate(connection.models));
+models.forEach((model) => model.associate(connection.models));
+console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');

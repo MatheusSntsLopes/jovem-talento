@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import colaboradorController from '../controllers/ColaboradorController';
-import loginRequired from '../middlewares/loginRequired';
+import colaboradorRequired from '../middlewares/colaboradorRequired';
 
 const router = new Router();
 router.post('/', colaboradorController.store);
 router.get('/', colaboradorController.index);
-router.get('/', loginRequired, colaboradorController.show);
-router.put('/', loginRequired, colaboradorController.update);
-router.delete('/', loginRequired, colaboradorController.delete);
+router.get('/', colaboradorRequired, colaboradorController.show);
+router.put('/', colaboradorRequired, colaboradorController.update);
+router.delete('/', colaboradorRequired, colaboradorController.delete);
 export default router;

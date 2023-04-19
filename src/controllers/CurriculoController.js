@@ -14,11 +14,7 @@ class CurriculoController {
   async index(req, res) {
     try {
       const curriculos = await Curriculo.findAll({
-        attributes: ['biografia', 'formacao', 'experiencia', 'competencia', 'habilidade'],
-        include: {
-          model: Colaborador,
-          attributes: ['nome', 'sobrenome', 'idade', 'estado', 'cidade', 'bairro', 'rua', 'cep', 'numero', 'telefone'],
-        },
+        attributes: ['id', 'biografia', 'formacao', 'experiencia', 'competencia', 'habilidade', 'colaborador_id'],
       });
       return res.json(curriculos);
     } catch (e) {
@@ -27,6 +23,19 @@ class CurriculoController {
   }
 
   async show(req, res) {
+    try {
+      const curriculo = await Curriculo.findByPk(req.curriculoId, {
+        attributes: ['id', 'biografia', 'formacao', 'experiencia', 'competencia', 'habilidade', 'colaborador_id'],
+
+      });
+
+      return res.json(curriculo);
+    } catch (e) {
+      return res.json(null);
+    }
+  }
+
+  async update(req, res) {
     try {
       const curriculo = await Curriculo.findByPk(req.curriculoId);
       if (!curriculo) {

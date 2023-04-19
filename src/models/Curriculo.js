@@ -1,12 +1,12 @@
 require('dotenv').config();
 
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import bcryptjs from 'bcryptjs';
 
 const sequelize = new Sequelize(process.env.DATABASE_CONNECTION);
 
 export default class Curriculo extends Model {
   static associate(models) {
+    console.log('Teste');
     this.belongsTo(models.Colaborador, { foreignKey: 'colaborador_id' });
   }
 }

@@ -2,17 +2,16 @@ require('dotenv').config();
 
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import bcryptjs from 'bcryptjs';
-import Curriculo from './Curriculo';
 
 const sequelize = new Sequelize(process.env.DATABASE_CONNECTION);
 
-export default class Colaborador extends Model {
+export default class Empresario extends Model {
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
 }
 
-Colaborador.init(
+Empresario.init(
   {
     nome: {
       type: {
@@ -38,7 +37,7 @@ Colaborador.init(
         },
       },
     },
-    cpf: {
+    cnpj: {
       type: DataTypes.INTEGER,
       defaultValue: '',
       unique: {
@@ -154,20 +153,17 @@ Colaborador.init(
   {
     sequelize,
     timestamps: false,
-    modelName: 'Colaboradores',
+    modelName: 'Empresarios',
     passwordIsValid(password) {
       bcryptjs.compare(password, this.password_hash);
     },
   },
-
 );
 
-Colaborador.Curriculo = Colaborador.hasOne(Curriculo);
-
-Colaborador.addHook('beforeSave', async (user) => {
+Empresario.addHook('beforeSave', async (user) => {
   if (user.password) {
     user.password_hash = await bcryptjs.hash(user.password, 8);
   }
 });
 
-Colaborador.sync();
+Empresario.sync();

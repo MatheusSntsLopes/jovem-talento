@@ -16,13 +16,10 @@ class ColaboradorController {
     try {
       const colaboradores = await Colaborador.findAll({
         attributes: ['id', 'nome', 'email', 'estado', 'cidade', 'rua'],
-        include: {
-          model: Curriculo,
-          attributes: ['biografia', 'formacao', 'experiencia', 'competencia', 'habilidade'],
-        },
       });
       return res.json(colaboradores);
     } catch (e) {
+      console.error(e);
       return res.json(null);
     }
   }
@@ -31,10 +28,7 @@ class ColaboradorController {
     try {
       const colaborador = await Colaborador.findByPk(req.colaboradorId, {
         attributes: ['id', 'nome', 'email', 'estado', 'cidade', 'rua'],
-        include: {
-          model: Curriculo,
-          attributes: ['biografia', 'formacao', 'experiencia', 'competencia', 'habilidade'],
-        },
+
       });
 
       return res.json(colaborador);
